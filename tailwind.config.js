@@ -11,6 +11,7 @@ export default {
         'inter': ['inter']
       },
       colors: {
+        'dark': '#222426',
         'dark-primary': '#424458',
         'dark-second': '#363743',
         'success': '#66FFB6'

@@ -6,9 +6,10 @@
     </section>
 
     <section class="w-full p-2">
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Motorista</RouterLink>
+      <RouterLink to="/" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Inicio</RouterLink>
+      <RouterLink to="/add-motorista" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Motorista</RouterLink>
       <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Rotas</RouterLink>
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Produtos</RouterLink>
+      <RouterLink to="/add-produto" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Produtos</RouterLink>
       <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Veiculos</RouterLink>
       <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Clientes</RouterLink>
       <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Pedido</RouterLink>

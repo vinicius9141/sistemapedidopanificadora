@@ -6,13 +6,17 @@
     </section>
 
     <section class="w-full p-2">
-      <RouterLink to="/" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Inicio</RouterLink>
-      <RouterLink to="/add-motorista" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Motorista</RouterLink>
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Rotas</RouterLink>
-      <RouterLink to="/add-produto" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Produtos</RouterLink>
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Veiculos</RouterLink>
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Clientes</RouterLink>
-      <RouterLink to="#" class="block my-2 w-full py-3 text-center bg-[#363743] text-white hover:opacity-70">Cadastro de Pedido</RouterLink>
+     <MenuLink path="/" label="Inicio" />
+     <MenuLink path="/add-motorista" label="Cadastro de Motorista" />
+     <MenuLink path="#" label="Cadastro de Rotas" />
+     <MenuLink path="/add-produto" label="Cadastro de Produtos" />
+     <MenuLink path="#" label="Cadastro de Veiculos" />
+     <MenuLink path="#" label="Cadastro de Clientes" />
+     <MenuLink path="#" label="Cadastro de Pedido" />
     </section>
   </div>
 </template>
+
+<script lang="ts" setup>
+import MenuLink from '@components/LinkMenu.vue'
+</script>

@@ -12,11 +12,12 @@
      <MenuLink path="/add-produto" label="Cadastro de Produtos" />
      <MenuLink path="#" label="Cadastro de Veiculos" />
      <MenuLink path="#" label="Cadastro de Clientes" />
-     <MenuLink path="#" label="Cadastro de Pedido" />
+     <MenuLink path="/add-pedido" label="Cadastro de Pedido" />
     </section>
   </div>
 </template>
 
 <script lang="ts" setup>
 import MenuLink from '@components/LinkMenu.vue'
+
 </script>

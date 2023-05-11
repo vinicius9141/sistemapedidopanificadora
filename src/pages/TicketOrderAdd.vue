@@ -9,13 +9,19 @@
    <Input label="Data" input-size="w-[47%]"/>
    <Input label="Horário" input-size="w-[47%]"/>
    <Select label="Cliente" input-size="w-[47%]" :data="data.client"/>
-
   </FormContainer>
+  <Table>
+    <RowCommom :qtd="true" />
+    <RowAdd name="Pão Francês" id="12563248" :qtd="true" />
+  </Table>
  </MainContainer>
 </template>
 <script lang="ts" setup>
   import MainContainer from '@components/MainContainer.vue'
   import FormContainer from '@components/Form/FormContainer.vue'
+  import RowAdd from '@components/Tables/RowAdd.vue'
+  import RowCommom from '@components/Tables/RowCommom.vue'
+  import Table from '@components/Form/Table.vue'
   import Input from '@components/Form/Input.vue'
   import Select from '@components/Form/Select.vue'
   import {reactive} from 'vue'

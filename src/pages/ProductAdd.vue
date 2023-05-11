@@ -1,12 +1,7 @@
 <template>
  <MainContainer>
   <FormContainer>
-   <Input label="Nome Completo" input-size="w-full"/>
-   <Input label="CNH" input-size="w-[47%]"/>
-   <Input label="CPF" input-size="w-[47%]"/>
-   <Input label="Rua" input-size="w-full"/>
-   <Input label="Bairro" input-size="w-[47%]"/>
-   <Input label="Nº" input-size="w-[30%]"/>
+   <Input label="Nome do produto" input-size="w-full"/>
   </FormContainer>
  </MainContainer>
 </template>

@@ -12,6 +12,5 @@ const data = reactive({
 
 onMounted(() => {
   data.currentPath = router.currentRoute.value.path
- 
 })
 </script>

@@ -4,7 +4,8 @@
       <Input
         label="Nome do produto"
         input-size="w-full"
-        v-on:get-value="(e) => (data.product = e)"
+        v-on:get-value="(e) => (data.name = e)"
+        :value="data.name"
       />
     </FormContainer>
   </MainContainer>
@@ -14,11 +15,11 @@ import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
 import { reactive } from "vue";
-
+import { ProductStore } from "@/services/ProductService.ts";
 const data = reactive({
-  product: "",
+  name: "",
 });
 const handleSubmit = () => {
-  alert(data.product);
+  ProductStore(data);
 };
 </script>

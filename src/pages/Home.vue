@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import MainContainer from '@components/MainContainer.vue'
-  import TicketCard from '@components/TicketCard.vue'
-  document.title = 'Sistema Pedidos Panificadora'
+import MainContainer from "@components/MainContainer.vue";
+import TicketCard from "@components/TicketCard.vue";
+
+document.title = "Sistema Pedidos Panificadora";
 </script>

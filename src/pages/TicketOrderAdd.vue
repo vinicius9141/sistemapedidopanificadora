@@ -52,7 +52,7 @@ import Table from "@components/Form/Table.vue";
 import Input from "@components/Form/Input.vue";
 import Select from "@components/Form/Select.vue";
 import { reactive, onMounted, ref } from "vue";
-import ProductRepository from "@/repository/impl/ProductRepository";
+import ProductRepository from "@/repository/ProductRepository";
 import { ProductStore } from "@stores/ProductStore";
 
 const allProducts = ref<{ name: string; id: string }[]>([]);

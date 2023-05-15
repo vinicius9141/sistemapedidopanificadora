@@ -1,6 +1,6 @@
 import { ProductStore as store } from "@stores/ProductStore";
 
-import ProductRepository from "@/repository/impl/ProductRepository";
+import ProductRepository from "@/repository/ProductRepository";
 
 export const ProductStore = async (data: { name: string }) => {
   if (!data.name) {

@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 
+import ProductRepository from "@/repository/ProductRepository";
+
 export const ProductStore = defineStore("products", {
   state: () => {
     return {
@@ -12,6 +14,9 @@ export const ProductStore = defineStore("products", {
   actions: {
     setAll(data: { name: string; id: string }[]) {
       this.product = data;
+    },
+    async findAll() {
+      await ProductRepository.findAll();
     },
     updateList(data: { name: string; id: string }) {
       this.product.push(data);

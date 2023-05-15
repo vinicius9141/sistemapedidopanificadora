@@ -7,7 +7,9 @@
       @change="handleSelectValue"
       class="w-full rounded-xl outline-none py-1 px-2"
     >
-      <option :value="item.id" v-for="item in data">{{ item.name }}</option>
+      <option :value="item.id" v-for="item in data">
+        {{ item.name }}
+      </option>
     </select>
   </div>
 </template>
@@ -18,6 +20,8 @@ const { label, inputSize, data } = defineProps<{
   inputSize: string;
   data: any[];
 }>();
+
 const emit = defineEmits(["getValue"]);
+
 const handleSelectValue = (e: any) => emit("getValue", e.target.value);
 </script>

@@ -13,7 +13,7 @@
         label="Quantidade"
         input-size="w-[47%]"
       />
-      <Select label="Motorista" input-size="w-[47%]" :data="data.showdriver" />
+      <Select label="Motorista" input-size="w-[47%]" :data="Drivers" />
       <Select label="Rota" input-size="w-[47%]" :data="data.showroute" />
       <Select label="Veículo" input-size="w-[47%]" :data="data.showmount" />
       <Input
@@ -51,10 +51,10 @@ import RowCommom from "@components/Tables/RowCommom.vue";
 import Table from "@components/Form/Table.vue";
 import Input from "@components/Form/Input.vue";
 import Select from "@components/Form/Select.vue";
-import { reactive, onMounted, ref } from "vue";
-import ProductRepository from "@/repository/ProductRepository";
+import { reactive, onMounted, ref, watch } from "vue";
 import { ProductStore } from "@stores/ProductStore";
 import { iDriverDTO } from "@/interface/DriverInterfaces";
+import { DriverStore } from "@stores/DriverStore";
 
 const allProducts = ref<{ name: string; id: string }[]>([]);
 const Drivers = ref<iDriverDTO[]>([]);
@@ -93,10 +93,16 @@ const data = reactive<iData>({
   ],
 });
 
-onMounted(async () => {
-  if (ProductStore().all.length <= 0) {
-    await ProductRepository.findAll();
+watch(
+  () => DriverStore().drivers,
+  () => {
+    Drivers.value = DriverStore().getAll;
   }
+);
+
+onMounted(async () => {
+  (await ProductStore().findAll()) as any;
   allProducts.value = ProductStore().all;
+  await DriverStore().findAll();
 });
 </script>

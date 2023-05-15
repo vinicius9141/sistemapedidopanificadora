@@ -1,8 +1,9 @@
 import { defineStore } from "pinia";
 
 import { iDriverDTO } from "@/interface/DriverInterfaces";
+import DriverRepository from "@/repository/DriverRepository";
 
-export const DriverStore = defineStore("products", {
+export const DriverStore = defineStore("drivers", {
   state: () => {
     return {
       drivers: [] as iDriverDTO[],
@@ -14,6 +15,9 @@ export const DriverStore = defineStore("products", {
   actions: {
     setAll(data: iDriverDTO[]) {
       this.drivers = data;
+    },
+    async findAll() {
+      DriverRepository.findAll();
     },
     updateList(data: iDriverDTO) {
       this.drivers.push(data);

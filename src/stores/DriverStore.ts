@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 import { iDriverDTO } from "@/interface/DriverInterfaces";
 
-export const ProductStore = defineStore("products", {
+export const DriverStore = defineStore("products", {
   state: () => {
     return {
       drivers: [] as iDriverDTO[],

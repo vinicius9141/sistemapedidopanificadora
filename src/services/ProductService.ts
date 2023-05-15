@@ -1,3 +1,5 @@
+import { ProductStore as store } from "@stores/ProductStore";
+
 import ProductRepository from "@/repository/impl/ProductRepository";
 
 export const ProductStore = async (data: { name: string }) => {
@@ -15,6 +17,7 @@ export const ProductStore = async (data: { name: string }) => {
     alert(
       "Houve um erro, tente novamente em alguns instantes, caso o erro continue entre em contato com o desenvolvedor! "
     );
+    store().updateList({ id: insert.id as string, name: data.name });
     return false;
   }
 

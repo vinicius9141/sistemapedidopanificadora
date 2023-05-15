@@ -4,6 +4,7 @@ export interface iDriverDTO {
   cpf: string;
   street: string;
   district: string;
+  number: number;
   id: string;
 }
 

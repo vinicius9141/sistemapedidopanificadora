@@ -1,6 +1,8 @@
+import { NotifyStore } from "@stores/NotifyStore";
 import { ProductStore as store } from "@stores/ProductStore";
 
 import ProductRepository from "@/repository/ProductRepository";
+import { errorContactDev } from "@/utils/Messages";
 
 export const ProductStore = async (data: { name: string }) => {
   if (!data.name) {
@@ -11,16 +13,17 @@ export const ProductStore = async (data: { name: string }) => {
     return false;
   }
 
-  const insert = await ProductRepository.create(data);
+  try {
+    const insert = await ProductRepository.create(data);
 
-  if (!insert.id) {
-    alert(
-      "Houve um erro, tente novamente em alguns instantes, caso o erro continue entre em contato com o desenvolvedor! "
-    );
     store().updateList({ id: insert.id as string, name: data.name });
-    return false;
-  }
+    NotifyStore().setMessage(
+      `Produto ${data.name} cadastrado com Sucesso!`,
+      "success"
+    );
 
-  data.name = "";
-  return true;
+    data.name = "";
+  } catch (error) {
+    NotifyStore().setMessage(errorContactDev, "danger");
+  }
 };

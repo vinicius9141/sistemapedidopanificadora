@@ -1,6 +1,9 @@
+import { NotifyStore } from "@stores/NotifyStore";
+
 import { iDriverDTO } from "@/interface/DriverInterfaces";
 import DriverRepository from "@/repository/DriverRepository";
 import { DriverStore } from "@/stores/DriverStore";
+import { errorContactDev } from "@/utils/Messages";
 
 export const DriverCreateService = async (
   data: Omit<iDriverDTO, "id">
@@ -22,10 +25,20 @@ export const DriverCreateService = async (
     const inserted = await DriverRepository.create(data);
     console.log(inserted);
     store.updateList({ ...data, id: inserted.id });
-  } catch (error) {
-    alert(
-      "Houve um erro, tente novamente em instantes ou entre em contato com o desenvolvedor."
+    NotifyStore().setMessage(
+      `Motorista ${data.name} cadastrado com Sucesso!`,
+      "success"
     );
+
+    data.cnh = "";
+    data.cpf = "";
+    data.name = "";
+    data.district = "";
+    data.street = "";
+    data.number = "";
+  } catch (error) {
+    NotifyStore().setMessage(errorContactDev, "danger");
+
     console.log(error);
     return;
   }

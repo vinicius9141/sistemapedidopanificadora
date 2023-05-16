@@ -5,7 +5,7 @@ export const NotifyStore = defineStore("notify", {
     return {
       message: "",
       position: 0,
-      type: "sucess",
+      type: "success",
     };
   },
   getters: {

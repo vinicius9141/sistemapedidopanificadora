@@ -1,5 +1,5 @@
 <template>
-  <div :class="`${inputSize} mx-2 my-2`">
+  <div :class="`flex flex-wrap ${inputSize} mx-2 my-2`">
     <label for="" class="text-white text-lg pl-3 pb-2 font-light">{{
       label
     }}</label>

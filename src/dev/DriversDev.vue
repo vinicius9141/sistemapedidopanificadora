@@ -15,7 +15,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import DriverRepository from "@/repository/DriverRepository";
 import { DriverStore } from "@stores/DriverStore";
 import { ref } from "vue";
-import { iDriverDTO } from "@/interface/DriverInterfaces";
+import { iDriverDTO } from "@/interface/DriverInterfacejs";
 
 const mocDrivers = ref<Omit<iDriverDTO, "id">[]>([
   {

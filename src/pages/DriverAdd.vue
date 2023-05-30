@@ -45,7 +45,7 @@ import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
 import { reactive } from "vue";
-import { iDriverDTO } from "@/interface/DriverInterfaces";
+import { iDriverDTO } from "@/interface/DriverInterfacejs";
 import { DriverCreateService } from "@/services/DriverServices";
 
 const driverData = reactive<Omit<iDriverDTO, "id">>({

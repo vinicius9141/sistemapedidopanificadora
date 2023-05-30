@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-import { iDriverDTO } from "@/interface/DriverInterfaces";
+import { iDriverDTO } from "@/interface/DriverInterface";
 import DriverRepository from "@/repository/DriverRepository";
 
 export const DriverStore = defineStore("drivers", {

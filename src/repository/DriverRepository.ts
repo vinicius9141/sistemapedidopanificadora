@@ -1,7 +1,7 @@
 import * as methods from "firebase/firestore";
 
 import { fireDatabase } from "@/config/database";
-import { iDriverDTO, iDriverRepository } from "@/interface/DriverInterfaces";
+import { iDriverDTO, iDriverRepository } from "@/interface/DriverInterface";
 import { DriverStore } from "@/stores/DriverStore";
 
 class DriverRepository implements iDriverRepository {

@@ -1,6 +1,6 @@
 import { NotifyStore } from "@stores/NotifyStore";
 
-import { iDriverDTO } from "@/interface/DriverInterfaces";
+import { iDriverDTO } from "@/interface/DriverInterface";
 import DriverRepository from "@/repository/DriverRepository";
 import { DriverStore } from "@/stores/DriverStore";
 import { errorContactDev } from "@/utils/Messages";

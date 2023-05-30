@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 import { iAddressDTO } from "@/interface/AddressInterface";
-import DriverRepository from "@/repository/DriverRepository";
+import AddressRepository from "@/repository/AddressRepository";
 
 export const AddressStore = defineStore("Addresses", {
   state: () => {
@@ -17,7 +17,7 @@ export const AddressStore = defineStore("Addresses", {
       this.Addresses = data;
     },
     async findAll() {
-      DriverRepository.findAll();
+      AddressRepository.findAll();
     },
     updateList(data: iAddressDTO) {
       this.Addresses.push(data);

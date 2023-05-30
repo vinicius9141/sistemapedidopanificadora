@@ -2,7 +2,7 @@
   <MainContainer>
     <FormContainer v-on:form-submit="handleSubmit">
       <Input
-        label="Nome do produto"
+        label="Nome do Cliente"
         input-size="w-full"
         v-on:get-value="(e) => (data.name = e)"
         :value="data.name"

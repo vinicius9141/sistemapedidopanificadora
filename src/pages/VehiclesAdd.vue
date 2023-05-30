@@ -2,7 +2,31 @@
   <MainContainer>
     <FormContainer v-on:form-submit="handleSubmit">
       <Input
-        label="Nome do produto"
+        label="Nome"
+        input-size="w-full"
+        v-on:get-value="(e) => (data.name = e)"
+        :value="data.name"
+      />
+      <Input
+        label="Modelo"
+        input-size="w-full"
+        v-on:get-value="(e) => (data.name = e)"
+        :value="data.name"
+      />
+      <Input
+        label="Marca"
+        input-size="w-full"
+        v-on:get-value="(e) => (data.name = e)"
+        :value="data.name"
+      />
+      <Input
+        label="Placa"
+        input-size="w-full"
+        v-on:get-value="(e) => (data.name = e)"
+        :value="data.name"
+      />
+      <Input
+        label="Renavam"
         input-size="w-full"
         v-on:get-value="(e) => (data.name = e)"
         :value="data.name"

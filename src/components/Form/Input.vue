@@ -8,7 +8,6 @@
       class="w-full py-1 rounded-xl outline-none py-1 px-2"
       @input="handleInputValue"
       :value="value"
-      required
     />
   </div>
 </template>

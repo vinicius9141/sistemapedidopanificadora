@@ -97,6 +97,7 @@ import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
 import { reactive } from "vue";
+import { AddressCreateService } from "@services/AddressServices";
 
 type iAddressForm = {
   street: string;
@@ -142,5 +143,8 @@ const moreAddressForm = () => {
   data.count.index = null;
 };
 
-const handleSubmit = () => {};
+const handleSubmit = () => {
+  const convert = JSON.stringify(data.addresses) as any as string;
+  AddressCreateService({ name: data.name, addresses: convert });
+};
 </script>

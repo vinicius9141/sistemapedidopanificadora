@@ -53,7 +53,7 @@ import Input from "@components/Form/Input.vue";
 import Select from "@components/Form/Select.vue";
 import { reactive, onMounted, ref, watch } from "vue";
 import { ProductStore } from "@stores/ProductStore";
-import { iDriverDTO } from "@/interface/DriverInterfacejs";
+import { iDriverDTO } from "@/interface/DriverInterface";
 import { DriverStore } from "@stores/DriverStore";
 
 const allProducts = ref<{ name: string; id: string }[]>([]);

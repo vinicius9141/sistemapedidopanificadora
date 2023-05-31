@@ -17,10 +17,10 @@
           input-size="w-full"
           v-on:get-value="
             (e) => {
-              data.count.street = e;
+              AddressInput.street = e;
             }
           "
-          :value="data.count.street"
+          :value="AddressInput.street"
         />
 
         <Input
@@ -28,39 +28,37 @@
           input-size="w-5/12"
           v-on:get-value="
             (e) => {
-              data.count.destrict = e;
+              AddressInput.destrict = e;
             }
           "
-          :value="data.count.destrict"
+          :value="AddressInput.destrict"
         />
         <Input
           label="Número"
           input-size="w-5/12"
           v-on:get-value="
             (e) => {
-              data.count.number = e;
+              AddressInput.number = e;
             }
           "
-          :value="data.count.number"
+          :value="AddressInput.number"
         />
         <Input
           label=""
           input-size="w-5/12 hidden"
           v-on:get-value="
             (e) => {
-              data.count.index = e;
+              indexUpdate = e;
             }
           "
-          :value="data.count.index"
+          :value="indexUpdate"
         />
         <button
           type="button"
           class="w-6/12 bg-blue-300 py-2 font-bold text-white self-center mt-6"
           @click="moreAddressForm"
         >
-          {{
-            !data.count.index ? "Adicionar novo endereço" : "Atualizar Endereço"
-          }}
+          {{ !indexUpdate ? "Adicionar novo endereço" : "Atualizar Endereço" }}
         </button>
       </div>
       <div
@@ -96,20 +94,26 @@
 import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { AddressCreateService } from "@services/AddressServices";
 
 type iAddressForm = {
   street: string;
   destrict: string;
   number: string;
-  index: number | null;
 };
 
 const data = reactive({
   name: "",
-  count: { street: "", destrict: "", number: "", index: null } as iAddressForm,
-  addresses: [] as Omit<iAddressForm, "index">[],
+  addresses: [] as iAddressForm[],
+});
+
+const indexUpdate = ref<number | null>(null);
+
+const AddressInput = ref<Omit<iAddressForm, "index">>({
+  street: "",
+  destrict: "",
+  number: "",
 });
 
 const rmAddressForm = (i: number) => {
@@ -117,34 +121,39 @@ const rmAddressForm = (i: number) => {
 };
 
 const edtAddressForm = (i: number) => {
-  data.count.street = data.addresses[i].street;
-  data.count.destrict = data.addresses[i].destrict;
-  data.count.number = data.addresses[i].number;
-  data.count.index = i;
+  AddressInput.value.street = data.addresses[i].street;
+  AddressInput.value.destrict = data.addresses[i].destrict;
+  AddressInput.value.number = data.addresses[i].number;
+  indexUpdate.value = i;
 };
 
 const moreAddressForm = () => {
-  if (!data.count.street || !data.count.destrict || !data.count.number) {
+  if (
+    !AddressInput.value.street ||
+    !AddressInput.value.destrict ||
+    !AddressInput.value.number
+  ) {
     alert("Preencha todos os campos!");
     return;
   }
-  const newData = JSON.parse(JSON.stringify(data.count));
-  delete newData.index;
 
-  if (!data.count.index) {
-    data.addresses.push(newData);
-  } else {
-    data.addresses[data.count.index] = newData;
-  }
+  if (!indexUpdate.value) {
+    console.log(AddressInput.value);
+    data.addresses.push({ ...AddressInput.value });
+  } else data.addresses[indexUpdate.value] = AddressInput.value;
 
-  data.count.street = "";
-  data.count.number = "";
-  data.count.destrict = "";
-  data.count.index = null;
+  AddressInput.value.street = "";
+  AddressInput.value.number = "";
+  AddressInput.value.destrict = "";
+  indexUpdate.value = null;
 };
 
-const handleSubmit = () => {
-  const convert = JSON.stringify(data.addresses) as any as string;
-  AddressCreateService({ name: data.name, addresses: convert });
+const handleSubmit = async () => {
+  const result = await AddressCreateService(data);
+  if (result) {
+    AddressInput.value.street = "";
+    AddressInput.value.number = "";
+    AddressInput.value.destrict = "";
+  }
 };
 </script>

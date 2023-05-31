@@ -7,11 +7,11 @@ import { errorContactDev } from "@/utils/Messages";
 
 export const AddressCreateService = async (
   data: Omit<iAddressDTO, "id">
-): Promise<void> => {
+): Promise<boolean> => {
   const store = AddressStore();
   if (!data.name || !data.addresses) {
     alert("Todos os campos precisam ser preenchidos corretamente!");
-    return;
+    return false;
   }
 
   try {
@@ -24,11 +24,12 @@ export const AddressCreateService = async (
     );
 
     data.name = "";
-    data.addresses = "";
+    data.addresses = [];
+    return true;
   } catch (error) {
     NotifyStore().setMessage(errorContactDev, "danger");
 
     console.log(error);
-    return;
+    return false;
   }
 };

@@ -1,7 +1,13 @@
+interface iAddressForm {
+  street: string;
+  destrict: string;
+  number: string;
+}
+
 export interface iAddressDTO {
   id: string;
   name: string;
-  addresses: string;
+  addresses: iAddressForm[];
 }
 
 export interface iEndressRepository {

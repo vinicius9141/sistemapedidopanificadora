@@ -1,6 +1,6 @@
 <template>
   <MainContainer>
-    <FormContainer>
+    <FormContainer @form-submit="handleSubmit">
       <div class="text-white text-lg pl-1 font-light text-left w-full mx-2">
         Produtos
       </div>
@@ -40,15 +40,15 @@
         v-on:get-value="(e) => (data.driver = e)"
       />
       <Input
-        v-on:get-value="(e) => (data.Date = e)"
-        :value="data.Date"
+        v-on:get-value="(e) => (data.date = e)"
+        :value="data.date"
         label="Data"
         input-size="w-[47%]"
         type="date"
       />
       <Input
-        v-on:get-value="(e) => (data.Hour = e)"
-        :value="data.Hour"
+        v-on:get-value="(e) => (data.hour = e)"
+        :value="data.hour"
         label="Horário"
         input-size="w-[47%]"
         type="time"
@@ -102,7 +102,7 @@ import { iAddressDTO, iAddressForm } from "@/interface/AddressInterface";
 import { VehicleStore } from "@/stores/VehicleStore";
 import { AddressStore } from "@/stores/AddressStore";
 import { ClientStore } from "@/stores/ClientStore";
-
+import { TicketCreateService } from "@services/TicketOrderServices";
 const allProducts = ref<any[]>([]);
 
 const setProduct = (e: any) => {
@@ -119,26 +119,22 @@ const setProduct = (e: any) => {
 };
 
 type iData = {
-  product: string;
-  amount: string;
-  Date: string;
-  Hour: string;
-  driver: iDriverDTO | void[];
+  date: string;
+  hour: string;
+  driver: iDriverDTO | null;
   products: any;
-  address: iAddressDTO | void[];
-  vehicle: iVehicleDTO | void[];
+  address: iAddressDTO | null;
+  vehicle: iVehicleDTO | null;
   client: iClientDTO | null;
 };
 
 const data = reactive<iData>({
-  product: "",
-  amount: "",
-  Date: "",
-  Hour: "",
-  driver: [],
+  date: "",
+  hour: "",
+  driver: null,
   products: {},
-  address: [],
-  vehicle: [],
+  address: null,
+  vehicle: null,
   client: null,
 });
 
@@ -174,6 +170,7 @@ const handleSelectClient = async (e: any) => {
           return { ...item, name, id };
         }
       );
+      data.address = selectOptions.Addresses[0] as any;
     }
   });
 };
@@ -187,13 +184,12 @@ watch(
   ],
   () => {
     selectOptions.drivers = DriverStore().getAll;
+    data.driver = selectOptions.drivers[0];
     selectOptions.vehicles = VehicleStore().getAll;
-    if (selectOptions.clients.length <= 1) {
-      selectOptions.clients = [
-        ...selectOptions.clients,
-        ...ClientStore().getAll,
-      ];
-    }
+    data.vehicle = selectOptions.vehicles[0];
+
+    selectOptions.clients = [selectOptions.clients[0], ...ClientStore().getAll];
+
     selectOptions.products = ProductStore().product;
   }
 );
@@ -207,4 +203,14 @@ onMounted(async () => {
   await AddressStore().findAll();
   await ClientStore().findAll();
 });
+
+const handleSubmit = async () => {
+  data.products = await Object.values(data.products).map((prod: any) => {
+    delete prod.element;
+    delete prod.index;
+    return prod;
+  });
+
+  TicketCreateService(data as any);
+};
 </script>

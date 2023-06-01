@@ -11,7 +11,6 @@ class ProductRepository {
       return { ...doc.data(), id: doc.id };
     }) as { name: string; id: string }[];
     ProductStore().setAll(docs);
-    console.log(ProductStore().product);
   }
 
   public async create(data: { name: string }) {

@@ -2,13 +2,13 @@ import { NotifyStore } from "@stores/NotifyStore";
 
 import { iVehicleDTO } from "@/interface/VeichlesInterface";
 import VehicleRepository from "@/repository/VehicleRepository";
-import { VeichleStore } from "@/stores/VehicleStore";
+import { VehicleStore } from "@/stores/VehicleStore";
 import { errorContactDev } from "@/utils/Messages";
 
 export const VehicleCreateService = async (
   data: Omit<iVehicleDTO, "id">
 ): Promise<void> => {
-  const store = VeichleStore();
+  const store = VehicleStore();
   if (
     !data.name ||
     !data.brand ||

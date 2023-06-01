@@ -1,9 +1,9 @@
 import { defineStore } from "pinia";
 
 import { iVehicleDTO } from "@/interface/VeichlesInterface";
-import VehicleRepository from "@/repository/DriverRepository";
+import VehicleRepository from "@/repository/VehicleRepository";
 
-export const VeichleStore = defineStore("vehicles", {
+export const VehicleStore = defineStore("vehicles", {
   state: () => {
     return {
       vehicles: [] as iVehicleDTO[],

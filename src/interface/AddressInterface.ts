@@ -1,4 +1,4 @@
-interface iAddressForm {
+export interface iAddressForm {
   street: string;
   destrict: string;
   number: string;

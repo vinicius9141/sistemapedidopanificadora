@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 import { iClientDTO } from "@/interface/ClientInterface";
-import AddressRepository from "@/repository/AddressRepository";
+import ClientRepository from "@/repository/ClientRepository";
 
 export const ClientStore = defineStore("Clients", {
   state: () => {
@@ -17,7 +17,7 @@ export const ClientStore = defineStore("Clients", {
       this.Clients = data;
     },
     async findAll() {
-      AddressRepository.findAll();
+      ClientRepository.findAll();
     },
     updateList(data: iClientDTO) {
       this.Clients.push(data);

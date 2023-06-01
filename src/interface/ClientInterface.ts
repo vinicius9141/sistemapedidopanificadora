@@ -1,9 +1,11 @@
+import { iAddressForm } from "./AddressInterface";
+
 export interface iClientDTO {
   id: string;
   name: string;
   cnpj: string;
   corporateName: string;
-  routeName: string;
+  routeName: iAddressForm[];
 }
 
 export interface iClientRepository {

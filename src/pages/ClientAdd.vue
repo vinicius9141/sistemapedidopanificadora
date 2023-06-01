@@ -23,7 +23,7 @@
         :data="selectData"
         label="Rota"
         input-size="w-full"
-        v-on:get-value="(e) => (data.routeName = e)"
+        v-on:get-value="selectRoute"
       />
     </FormContainer>
   </MainContainer>
@@ -35,20 +35,23 @@ import Input from "@components/Form/Input.vue";
 import Select from "@components/Form/Select.vue";
 import { onMounted, reactive, ref, watch } from "vue";
 import { AddressStore } from "@/stores/AddressStore";
-import { iClientDTO } from "@/interface/ClientInterface";
 import { ClientCreateService } from "@services/ClientServices";
+import { iClientDTO } from "@/interface/ClientInterface";
 
 const data = reactive<Omit<iClientDTO, "id">>({
   name: "",
   cnpj: "",
   corporateName: "",
-  routeName: "",
+  routeName: [],
 });
 
-const selectData = ref<{ id: string; name: string }[]>([
-  { id: "string", name: "string" },
-]);
+const selectData = ref<{ id: string; name: string }[]>([{ id: "", name: "" }]);
 
+const selectRoute = (e: any) => {
+  const getSelectRoutes = selectData.value.find((route) => route.id == e);
+  console.log(getSelectRoutes);
+  data.routeName = getSelectRoutes as any;
+};
 onMounted(async () => {
   await AddressStore().findAll();
 });
@@ -57,7 +60,7 @@ watch(
   () => AddressStore().getAll,
   () => {
     selectData.value = AddressStore().getAll;
-    data.routeName = AddressStore().getAll[0] as any as string;
+    data.routeName = AddressStore().getAll[0] as any;
   }
 );
 </script>

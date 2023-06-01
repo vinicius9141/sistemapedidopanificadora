@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 import { iTocketOrderDTO } from "@/interface/TicketOrderInterface";
-import ClientRepository from "@/repository/ClientRepository";
+import TicketOrderRepository from "@/repository/TicketOrderRepository";
 
 export const TicketOrderStore = defineStore("TicketsOrder", {
   state: () => {
@@ -17,7 +17,7 @@ export const TicketOrderStore = defineStore("TicketsOrder", {
       this.Tickets = data;
     },
     async findAll() {
-      ClientRepository.findAll();
+      TicketOrderRepository.findAll();
     },
     updateList(data: iTocketOrderDTO) {
       this.Tickets.push(data);

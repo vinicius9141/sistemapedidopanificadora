@@ -15,6 +15,9 @@
 
 <script lang="ts" setup>
 import { iTocketOrderDTO } from "@/interface/TicketOrderInterface";
-
+import { onMounted } from "vue";
 const { order } = defineProps<{ order: iTocketOrderDTO }>();
+onMounted(() => {
+  console.log(order);
+});
 </script>

@@ -7,6 +7,7 @@ export const ClientStore = defineStore("Clients", {
   state: () => {
     return {
       Clients: [] as iClientDTO[],
+      currentClient: {} as iClientDTO,
     };
   },
   getters: {

@@ -58,7 +58,11 @@
           class="w-6/12 bg-blue-300 py-2 font-bold text-white self-center mt-6"
           @click="moreAddressForm"
         >
-          {{ !indexUpdate ? "Adicionar novo endereço" : "Atualizar Endereço" }}
+          {{
+            indexUpdate == null
+              ? "Adicionar novo endereço"
+              : "Atualizar Endereço"
+          }}
         </button>
       </div>
       <div
@@ -136,11 +140,12 @@ const moreAddressForm = () => {
     alert("Preencha todos os campos!");
     return;
   }
-
-  if (!indexUpdate.value) {
-    console.log(AddressInput.value);
+  console.log(indexUpdate.value);
+  if (indexUpdate.value == null) {
     data.addresses.push({ ...AddressInput.value });
-  } else data.addresses[indexUpdate.value] = AddressInput.value;
+  } else {
+    data.addresses[indexUpdate.value] = { ...AddressInput.value };
+  }
 
   AddressInput.value.street = "";
   AddressInput.value.number = "";

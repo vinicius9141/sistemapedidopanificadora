@@ -1,0 +1,47 @@
+<template>
+  <MainContainer>
+    <section class="w-9/12 my-0 h-0 py-0 justify-between flex">
+      <div class="w-4/12 flex items-center mt-5">
+        <h2 class="text-white text-2xl">Produtos</h2>
+        <button
+          class="w-4/12 ml-1 mt-2 h-8 text-white rounded-xl font-bold bg-[#0bb2ff]"
+        >
+          Adicionar
+        </button>
+      </div>
+      <input
+        type="text"
+        placeholder="Pesquisar Produto"
+        class="w-6/12 h-10 rounded-r-md px-2 outline-0"
+      />
+    </section>
+    <Table
+      :data="products"
+      :keys="['id', 'name']"
+      v-on:edit-event="handleEdit"
+      v-on:remove-event="handleRemove"
+    />
+  </MainContainer>
+</template>
+<script lang="ts" setup>
+import MainContainer from "@components/MainContainer.vue";
+import { ProductStore } from "@stores/ProductStore";
+import { onMounted, ref } from "vue";
+import Table from "@/components/Tables/Table.vue";
+const products = ref<any>({});
+
+const handleEdit = (e: any) => {
+  console.log(e);
+};
+const handleRemove = (e: any) => {
+  console.log(e);
+};
+
+onMounted(async () => {
+  const store = ProductStore();
+  if (store.all.length <= 0) {
+    await store.findAll();
+  }
+  products.value = store.all;
+});
+</script>

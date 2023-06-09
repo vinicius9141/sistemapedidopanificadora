@@ -13,7 +13,7 @@
       <MenuLink path="/" label="Inicio" />
       <MenuLink path="/add-motorista" label="Cadastro de Motorista" />
       <MenuLink path="/add-rota" label="Cadastro de Rotas" />
-      <MenuLink path="/add-produto" label="Cadastro de Produtos" />
+      <MenuLink path="/produtos" label="Cadastro de Produtos" />
       <MenuLink path="/add-veiculo" label="Cadastro de Veiculos" />
       <MenuLink path="/add-cliente" label="Cadastro de Clientes" />
       <MenuLink path="/add-pedido" label="Cadastro de Pedido" />

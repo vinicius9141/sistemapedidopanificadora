@@ -33,4 +33,7 @@ const router = createRouter({
   linkExactActiveClass: "active",
 });
 
+export const routerQuery = () => router.currentRoute.value.query;
+export const navigate = (to: string) => router.push(to);
+
 export default router;

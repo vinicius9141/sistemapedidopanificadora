@@ -19,6 +19,11 @@ class ProductRepository {
       data
     );
   }
+
+  public async update(data: any) {
+    const t = methods.doc(fireDatabase, "Products", data.id);
+    return await methods.updateDoc(t, { name: data.name });
+  }
 }
 
 export default new ProductRepository();

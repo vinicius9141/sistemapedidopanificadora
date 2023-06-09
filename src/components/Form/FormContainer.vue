@@ -9,14 +9,14 @@
       type="submit"
       class="bg-success w-3/6 rounded-lg py-2 mt-5 text-xl font-semibold"
     >
-      Cadastrar
+      {{ props.btnSendValue ? props.btnSendValue : "Cadastrar" }}
     </button>
   </form>
 </template>
 
 <script lang="ts" setup>
 const emit = defineEmits(["formSubmit"]);
-
+const props = defineProps<{ btnSendValue?: string }>();
 const handleSubmit = (e: any) => {
   emit("formSubmit", e);
 };

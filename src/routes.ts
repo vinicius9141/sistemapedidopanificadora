@@ -1,10 +1,11 @@
 import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 import DriverAdd from "@pages/DriverAdd.vue";
 
+import Drivers from "@pages/Drivers.vue";
 import Home from "@pages/Home.vue";
 import Login from "@pages/Login.vue";
-import ProductAdd from "@pages/ProductAdd.vue";
 
+import ProductAdd from "@pages/ProductAdd.vue";
 import Products from "@pages/Products.vue";
 import TicketOrderAdd from "@pages/TicketOrderAdd.vue";
 
@@ -18,6 +19,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/", component: Home },
   { path: "/entrar", component: Login },
   { path: "/produtos", component: Products },
+  { path: "/motoristas", component: Drivers },
   { path: "/add-motorista", component: DriverAdd },
   { path: "/add-produto", component: ProductAdd },
   { path: "/add-pedido", component: TicketOrderAdd },

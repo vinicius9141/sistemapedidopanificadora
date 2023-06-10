@@ -11,7 +11,7 @@
 
     <section class="w-full p-2">
       <MenuLink path="/" label="Inicio" />
-      <MenuLink path="/add-motorista" label="Cadastro de Motorista" />
+      <MenuLink path="/motoristas" label="Cadastro de Motorista" />
       <MenuLink path="/add-rota" label="Cadastro de Rotas" />
       <MenuLink path="/produtos" label="Cadastro de Produtos" />
       <MenuLink path="/add-veiculo" label="Cadastro de Veiculos" />

@@ -29,6 +29,7 @@
 import MainContainer from "@components/MainContainer.vue";
 import { ProductStore } from "@stores/ProductStore";
 import { onMounted, ref } from "vue";
+import { ProductRemoveService } from "@services/ProductService";
 import Table from "@/components/Tables/Table.vue";
 import router from "@/routes";
 const products = ref<any>({});
@@ -38,8 +39,10 @@ const handleEdit = async (e: any) => {
   await store.setCurrent(e);
   router.push("/add-produto?type=edit");
 };
-const handleRemove = (e: any) => {
-  console.log(e);
+const handleRemove = async (e: any) => {
+  const store = ProductStore();
+  await store.setCurrent(e);
+  await ProductRemoveService();
 };
 
 onMounted(async () => {

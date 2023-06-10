@@ -32,5 +32,11 @@ export const ProductStore = defineStore("products", {
       });
       this.current = { name: "", id: "" };
     },
+    async removeProduct(data: { id: string }) {
+      this.product.forEach((product, i) => {
+        if (product.id == data.id) this.product.splice(i, 1);
+      });
+      this.current = { name: "", id: "" };
+    },
   },
 });

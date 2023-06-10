@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-9/12 mx-3 mt-[-24vh] py-0 h-[60vh] bg-white rounded-lg overflow-y-auto"
+    class="w-9/12 mx-3 mt-[-24vh] py-0 h-[60vh] bg-white rounded-lg overflow-y-auto transition-[.5s]"
   >
     <RowTitle :col1="format.id" :col2="format.col2" :col3="format.col3" />
     <Row

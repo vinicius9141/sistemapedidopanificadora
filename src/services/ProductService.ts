@@ -60,3 +60,20 @@ export const ProductUpdateService = async (data: {
     NotifyStore().setMessage(errorContactDev, "danger");
   }
 };
+
+export const ProductRemoveService = async () => {
+  const data = ProductStore().getCurrent;
+
+  try {
+    await ProductRepository.destroy({ id: data.id });
+
+    NotifyStore().setMessage(
+      `Produto ${data.name} removido com Sucesso!`,
+      "success"
+    );
+
+    ProductStore().removeProduct({ id: data.id });
+  } catch (error) {
+    NotifyStore().setMessage(errorContactDev, "danger");
+  }
+};

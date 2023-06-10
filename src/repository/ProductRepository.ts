@@ -24,6 +24,12 @@ class ProductRepository {
     const t = methods.doc(fireDatabase, "Products", data.id);
     return await methods.updateDoc(t, { name: data.name });
   }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "Products", data.id)
+    );
+  }
 }
 
 export default new ProductRepository();

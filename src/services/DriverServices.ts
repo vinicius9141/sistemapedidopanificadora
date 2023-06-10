@@ -61,10 +61,7 @@ export const DriverUpdateService = async (data: iDriverDTO) => {
   try {
     await DriverRepository.update(data);
 
-    NotifyStore().setMessage(
-      `Nome do produto modificado com Sucesso para ${data.name}!`,
-      "warning"
-    );
+    NotifyStore().setMessage(`Edição realizada com sucesso!`, "warning");
 
     DriverStore()
       .updateDriver(data)
@@ -84,10 +81,7 @@ export const DriverRemoveService = async () => {
   try {
     await DriverRepository.destroy({ id: data.id });
 
-    NotifyStore().setMessage(
-      `Produto ${data.name} removido com Sucesso!`,
-      "success"
-    );
+    NotifyStore().setMessage(`Removido com Sucesso!`, "success");
 
     DriverStore().removeDriver({ id: data.id });
   } catch (error) {

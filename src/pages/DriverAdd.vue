@@ -67,7 +67,7 @@ import { DriverStore } from "@/stores/DriverStore";
 const id = ref<string>("");
 const btnValue = ref<string>("");
 
-const data = reactive<Omit<iDriverDTO, "id">>({
+let data = reactive<Omit<iDriverDTO, "id">>({
   name: "",
   cpf: "",
   cnh: "",
@@ -89,12 +89,7 @@ const sendEdition = async () => {
 onMounted(async () => {
   const store = DriverStore();
   if (routerQuery().type == "edit") {
-    data.cnh = store.getCurrent?.cnh as string;
-    data.cpf = store.getCurrent?.cpf as string;
-    data.district = store.getCurrent?.district as string;
-    data.name = store.getCurrent?.name as string;
-    data.number = store.getCurrent?.number as string;
-    data.street = store.getCurrent?.street as string;
+    data = store.getCurrent as iDriverDTO;
     id.value = store.getCurrent?.id as string;
     btnValue.value = "Editar";
   }

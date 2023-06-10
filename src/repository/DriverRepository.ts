@@ -20,9 +20,11 @@ class DriverRepository implements iDriverRepository {
     )) as any as iDriverDTO;
   }
 
-  public async update(data: any) {
+  public async update(data: iDriverDTO) {
     const t = methods.doc(fireDatabase, "Drivers", data.id);
-    return await methods.updateDoc(t, { name: data.name });
+    const resolve = { ...data } as any;
+    delete resolve.id;
+    return await methods.updateDoc(t, resolve);
   }
 
   public async destroy(data: { id: string }) {

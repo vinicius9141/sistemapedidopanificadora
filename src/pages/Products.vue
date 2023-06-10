@@ -3,11 +3,13 @@
     <section class="w-9/12 my-0 h-0 py-0 justify-between flex">
       <div class="w-4/12 flex items-center mt-5">
         <h2 class="text-white text-2xl">Produtos</h2>
-        <button
-          class="w-4/12 ml-1 mt-2 h-8 text-white rounded-xl font-bold bg-[#0bb2ff]"
+
+        <RouterLink
+          class="w-4/12 ml-2 mt-2 h-8 text-white rounded-xl font-bold bg-[#0bb2ff] text-center py-1"
+          to="/add-produto"
         >
           Adicionar
-        </button>
+        </RouterLink>
       </div>
       <input
         type="text"

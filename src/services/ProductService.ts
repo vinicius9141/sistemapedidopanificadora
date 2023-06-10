@@ -42,17 +42,20 @@ export const ProductUpdateService = async (data: {
   }
 
   try {
-    const insert = await ProductRepository.update(data);
-    console.log(insert);
+    await ProductRepository.update(data);
 
     NotifyStore().setMessage(
-      `Produto ${data.name} modificado com Sucesso!`,
-      "success"
+      `Nome do produto modificado com Sucesso para ${data.name}!`,
+      "warning"
     );
 
     ProductStore()
       .updateProduct({ name: data.name, id: data.id })
-      .finally(() => navigate("/produtos"));
+      .finally(() => {
+        setTimeout(() => {
+          navigate("/produtos");
+        }, 3000);
+      });
   } catch (error) {
     NotifyStore().setMessage(errorContactDev, "danger");
   }

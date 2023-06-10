@@ -1,39 +1,64 @@
 <template>
   <div
-    :class="`hidden max-w-[50%] w-8/12 p-2 text-center font-light bg-[${colors}]-300 top-0 transition-2 left-0 right-0 m-auto`"
+    ref="notfyElement"
+    class="absolute max-w-[50%] bg-blue-500 w-8/12 h-12 p-2 text-center font-light top-0 left-0 right-0 m-auto"
   >
-    <p>
+    <div
+      class="w-full h-[100%] justify-between text-white font-semibold flex items-center"
+    >
       {{ message }}
       <button class="text-white font-bold" @click="closed">x</button>
-    </p>
+    </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import { NotifyStore } from "@stores/NotifyStore";
 
-const colors = ref<string>("blue");
+const colors = ref<string>("bg-blue-500");
 const position = ref<string>("-100px");
 const message = ref<string>("");
+const notfyElement = ref<HTMLElement>();
 
 watch(
   () => NotifyStore().getMessage,
   () => {
     const store = NotifyStore();
-    if (store.type == "success") colors.value = "green";
-    else if (store.type == "warning") colors.value = "yellow";
-    else if (store.type == "danger") colors.value = "red";
-    else if (store.type == "info") colors.value = "blue";
-    position.value = "0";
-    message.value = NotifyStore().getMessage;
+    console.log(store.getMessage);
+    if (store.getMessage.length > 0) {
+      notfyElement.value?.classList.remove(colors.value);
 
-    setTimeout(() => (position.value = "-100px"), 3000);
+      if (store.type == "success") colors.value = "bg-green-500";
+      else if (store.type == "warning") colors.value = "bg-yellow-500";
+      else if (store.type == "danger") colors.value = "bg-red-500";
+      else if (store.type == "info") colors.value = "bg-blue-500";
+      position.value = "0";
+      message.value = NotifyStore().getMessage;
+
+      notfyElement.value?.classList.add(colors.value);
+      animNotify(true);
+
+      setTimeout(() => {
+        animNotify(false);
+      }, 3000);
+      return;
+    }
   }
 );
 
+const animNotify = (active: boolean) => {
+  if (active) notfyElement.value!.style.transform = "translateY(0px)";
+  else notfyElement.value!.style.transform = "translateY(-100px)";
+};
+
+onMounted(() => {
+  notfyElement.value!.style.transition = ".5s";
+  animNotify(false);
+});
+
 const closed = () => {
   NotifyStore().setMessage("", "");
-  position.value = "-100px";
+  animNotify(false);
 };
 </script>

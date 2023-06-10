@@ -1,11 +1,16 @@
 <template>
   <MainContainer>
-    <FormContainer v-on:form-submit="() => VehicleCreateService(data)">
+    <ConfirmModal
+      v-on:action-modal="setModalConfirm"
+      v-on:confirm-event="() => modalConfirm(true, sendEdition)"
+      v-on:exclude-event="() => modalConfirm(false, sendEdition)"
+    />
+    <FormContainer v-on:form-submit="handleSubmit" :btn-send-value="btnValue">
       <Input
         label="Nome"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.name = e;
           }
         "
@@ -15,7 +20,7 @@
         label="Modelo"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.model = e;
           }
         "
@@ -25,7 +30,7 @@
         label="Marca"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.brand = e;
           }
         "
@@ -35,7 +40,7 @@
         label="Placa"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.licensePlate = e;
           }
         "
@@ -45,7 +50,7 @@
         label="Renavam"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.Renavam = e;
           }
         "
@@ -58,13 +63,47 @@
 import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
-import { reactive } from "vue";
-import { VehicleCreateService } from "@/services/VehicleServices";
-const data = reactive({
+import ConfirmModal from "@/components/Modals/Confirm.vue";
+import {
+  modalActive,
+  modalConfirm,
+  setModalConfirm,
+} from "@/services/Modal/actionConfirm";
+import { reactive, ref, onMounted } from "vue";
+import {
+  VehicleCreateService,
+  vehicleUpdateService,
+} from "@/services/VehicleServices";
+import { routerQuery } from "@/routes";
+import { iVehicleDTO } from "@/interface/VeichlesInterface";
+import { VehicleStore } from "@/stores/VehicleStore";
+let data = reactive({
   name: "",
   model: "",
   brand: "",
   licensePlate: "",
   Renavam: "",
+});
+
+const id = ref<string>("");
+const btnValue = ref<string>("");
+
+const handleSubmit = async () => {
+  if (!routerQuery().type || routerQuery().type != "edit")
+    VehicleCreateService(data);
+  else modalActive.value(true);
+};
+
+const sendEdition = async () => {
+  await vehicleUpdateService({ ...data, id: id.value });
+};
+
+onMounted(async () => {
+  const store = VehicleStore();
+  if (routerQuery().type == "edit") {
+    data = store.getCurrent as iVehicleDTO;
+    id.value = store.getCurrent?.id as string;
+    btnValue.value = "Editar";
+  }
 });
 </script>

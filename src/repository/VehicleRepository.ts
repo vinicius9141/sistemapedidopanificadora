@@ -20,6 +20,19 @@ class VehicleRepository implements iVehicleRepository {
       data
     )) as any as iVehicleDTO;
   }
+
+  public async update(data: iVehicleDTO) {
+    const t = methods.doc(fireDatabase, "Vehicles", data.id);
+    const resolve = { ...data } as any;
+    delete resolve.id;
+    return await methods.updateDoc(t, resolve);
+  }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "Vehicles", data.id)
+    );
+  }
 }
 
 export default new VehicleRepository();

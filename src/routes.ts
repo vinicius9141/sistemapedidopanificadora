@@ -4,10 +4,11 @@ import DriverAdd from "@pages/DriverAdd.vue";
 import Drivers from "@pages/Drivers.vue";
 import Home from "@pages/Home.vue";
 import Login from "@pages/Login.vue";
-
 import ProductAdd from "@pages/ProductAdd.vue";
+
 import Products from "@pages/Products.vue";
 import TicketOrderAdd from "@pages/TicketOrderAdd.vue";
+import Vehicles from "@pages/Vehicles.vue";
 
 import AdressesAdd from "@/pages/AdressesAdd.vue";
 import ClientAdd from "@/pages/ClientAdd.vue";
@@ -19,6 +20,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/", component: Home },
   { path: "/entrar", component: Login },
   { path: "/produtos", component: Products },
+  { path: "/veiculos", component: Vehicles },
   { path: "/motoristas", component: Drivers },
   { path: "/add-motorista", component: DriverAdd },
   { path: "/add-produto", component: ProductAdd },

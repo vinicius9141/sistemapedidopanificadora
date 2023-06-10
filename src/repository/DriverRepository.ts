@@ -11,13 +11,24 @@ class DriverRepository implements iDriverRepository {
     const docs = snap.docs.map((doc) => {
       return { ...doc.data(), id: doc.id };
     }) as any as iDriverDTO[];
-    DriverStore().setAll(docs);
+    await DriverStore().setAll(docs);
   }
   public async create(data: Omit<iDriverDTO, "id">): Promise<iDriverDTO> {
     return (await methods.addDoc(
       methods.collection(fireDatabase, "Drivers"),
       data
     )) as any as iDriverDTO;
+  }
+
+  public async update(data: any) {
+    const t = methods.doc(fireDatabase, "Drivers", data.id);
+    return await methods.updateDoc(t, { name: data.name });
+  }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "Drivers", data.id)
+    );
   }
 }
 

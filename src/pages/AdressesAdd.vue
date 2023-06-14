@@ -1,11 +1,16 @@
 <template>
   <MainContainer>
-    <FormContainer v-on:form-submit="handleSubmit">
+    <ConfirmModal
+      v-on:action-modal="setModalConfirm"
+      v-on:confirm-event="() => modalConfirm(true, sendEdition)"
+      v-on:exclude-event="() => modalConfirm(false, sendEdition)"
+    />
+    <FormContainer v-on:form-submit="handleSubmit" :btn-send-value="btnValue">
       <Input
         label="Nome da Rota"
         input-size="w-full"
         v-on:get-value="
-          (e) => {
+          (e: any) => {
             data.name = e;
           }
         "
@@ -16,7 +21,7 @@
           label="Rua"
           input-size="w-full"
           v-on:get-value="
-            (e) => {
+            (e: any) => {
               AddressInput.street = e;
             }
           "
@@ -27,7 +32,7 @@
           label="Bairro"
           input-size="w-5/12"
           v-on:get-value="
-            (e) => {
+            (e: any) => {
               AddressInput.destrict = e;
             }
           "
@@ -37,7 +42,7 @@
           label="Número"
           input-size="w-5/12"
           v-on:get-value="
-            (e) => {
+            (e: any) => {
               AddressInput.number = e;
             }
           "
@@ -47,7 +52,7 @@
           label=""
           input-size="w-5/12 hidden"
           v-on:get-value="
-            (e) => {
+            (e: any) => {
               indexUpdate = e;
             }
           "
@@ -98,8 +103,20 @@
 import MainContainer from "@components/MainContainer.vue";
 import FormContainer from "@components/Form/FormContainer.vue";
 import Input from "@components/Form/Input.vue";
-import { reactive, ref } from "vue";
-import { AddressCreateService } from "@services/AddressServices";
+import { onMounted, reactive, ref } from "vue";
+import ConfirmModal from "@/components/Modals/Confirm.vue";
+import {
+  AddressCreateService,
+  addressUpdateService,
+} from "@services/AddressServices";
+import {
+  modalActive,
+  modalConfirm,
+  setModalConfirm,
+} from "@/services/Modal/actionConfirm";
+import { routerQuery } from "@/routes";
+import { iAddressDTO } from "@/interface/AddressInterface";
+import { AddressStore } from "@/stores/AddressStore";
 
 type iAddressForm = {
   street: string;
@@ -107,7 +124,10 @@ type iAddressForm = {
   number: string;
 };
 
-const data = reactive({
+const id = ref<string>("");
+const btnValue = ref<string>("");
+
+let data = reactive({
   name: "",
   addresses: [] as iAddressForm[],
 });
@@ -153,12 +173,28 @@ const moreAddressForm = () => {
   indexUpdate.value = null;
 };
 
-const handleSubmit = async () => {
-  const result = await AddressCreateService(data);
-  if (result) {
-    AddressInput.value.street = "";
-    AddressInput.value.number = "";
-    AddressInput.value.destrict = "";
-  }
+const sendEdition = async () => {
+  await addressUpdateService({ ...data, id: id.value });
 };
+
+const handleSubmit = async () => {
+  if (!routerQuery().type || routerQuery().type != "edit") {
+    const result = await AddressCreateService(data);
+    if (result) {
+      AddressInput.value.street = "";
+      AddressInput.value.number = "";
+      AddressInput.value.destrict = "";
+    }
+  } else modalActive.value(true);
+};
+
+onMounted(async () => {
+  const store = AddressStore();
+  if (routerQuery().type == "edit") {
+    console.log(store.getCurrent);
+    data = store.getCurrent as iAddressDTO;
+    id.value = store.getCurrent?.id as string;
+    btnValue.value = "Editar";
+  }
+});
 </script>

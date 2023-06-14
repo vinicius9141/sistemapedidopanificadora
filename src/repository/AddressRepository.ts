@@ -19,6 +19,18 @@ class AddressRepository implements iEndressRepository {
       data
     )) as any as iAddressDTO;
   }
+  public async update(data: iAddressDTO) {
+    const t = methods.doc(fireDatabase, "Addresses", data.id);
+    const resolve = { ...data } as any;
+    delete resolve.id;
+    return await methods.updateDoc(t, resolve);
+  }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "Addresses", data.id)
+    );
+  }
 }
 
 export default new AddressRepository();

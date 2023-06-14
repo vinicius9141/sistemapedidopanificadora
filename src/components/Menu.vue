@@ -11,12 +11,12 @@
 
     <section class="w-full p-2">
       <MenuLink path="/" label="Inicio" />
-      <MenuLink path="/motoristas" label="Cadastro de Motorista" />
-      <MenuLink path="/rotas" label="Cadastro de Rotas" />
-      <MenuLink path="/produtos" label="Cadastro de Produtos" />
-      <MenuLink path="/veiculos" label="Cadastro de Veiculos" />
-      <MenuLink path="/add-cliente" label="Cadastro de Clientes" />
-      <MenuLink path="/add-pedido" label="Cadastro de Pedido" />
+      <MenuLink path="/add-pedido" label="Pedidos" />
+      <MenuLink path="/clientes" label="Clientes" />
+      <MenuLink path="/produtos" label="Produtos" />
+      <MenuLink path="/rotas" label="Rotas" />
+      <MenuLink path="/motoristas" label="Motorista" />
+      <MenuLink path="/veiculos" label="Veiculos" />
     </section>
   </div>
 </template>

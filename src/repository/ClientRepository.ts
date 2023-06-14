@@ -19,6 +19,19 @@ class ClientRepository implements iClientRepository {
       data
     )) as any as iClientDTO;
   }
+
+  public async update(data: iClientDTO) {
+    const t = methods.doc(fireDatabase, "Clients", data.id);
+    const resolve = { ...data } as any;
+    delete resolve.id;
+    return await methods.updateDoc(t, resolve);
+  }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "Clients", data.id)
+    );
+  }
 }
 
 export default new ClientRepository();

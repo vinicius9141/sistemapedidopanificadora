@@ -2,6 +2,8 @@ import { NotifyStore } from "@stores/NotifyStore";
 
 import { iClientDTO } from "@/interface/ClientInterface";
 import DriverRepository from "@/repository/ClientRepository";
+import ClientRepository from "@/repository/ClientRepository";
+import { navigate } from "@/routes";
 import { ClientStore } from "@/stores/ClientStore";
 import { errorContactDev } from "@/utils/Messages";
 
@@ -27,11 +29,48 @@ export const ClientCreateService = async (
     data.name = "";
     data.cnpj = "";
     data.corporateName = "";
-    data.routeName = "";
+    data.routeName = [];
   } catch (error) {
     NotifyStore().setMessage(errorContactDev, "danger");
 
     console.log(error);
     return;
+  }
+};
+
+export const ClientUpdateService = async (data: iClientDTO) => {
+  if (!data.name || !data.cnpj || !data.corporateName || !data.routeName) {
+    alert("Todos os campos precisam ser preenchidos corretamente!");
+    return;
+  }
+
+  try {
+    await ClientRepository.update(data);
+
+    NotifyStore().setMessage(`Edição realizada com sucesso!`, "success");
+
+    ClientStore()
+      .updateClient(data)
+      .finally(() => {
+        setTimeout(() => {
+          navigate("/clientes");
+        }, 3000);
+      });
+  } catch (error) {
+    NotifyStore().setMessage(errorContactDev, "danger");
+  }
+};
+
+export const clientRemoveService = async () => {
+  const data = ClientStore().getCurrent as iClientDTO;
+
+  try {
+    await DriverRepository.destroy({ id: data.id });
+
+    NotifyStore().setMessage(`Removido com Sucesso!`, "success");
+
+    ClientStore().removeClient({ id: data.id });
+  } catch (error) {
+    NotifyStore().setMessage(errorContactDev, "danger");
   }
 };

@@ -24,6 +24,19 @@ class TicketOrderRepository implements iTocketOrderRepository {
       data
     )) as any as iTocketOrderDTO;
   }
+
+  public async update(data: iTocketOrderDTO) {
+    const t = methods.doc(fireDatabase, "TicketOrder", data.id);
+    const resolve = { ...data } as any;
+    delete resolve.id;
+    return await methods.updateDoc(t, resolve);
+  }
+
+  public async destroy(data: { id: string }) {
+    return await methods.deleteDoc(
+      methods.doc(fireDatabase, "TicketOrder", data.id)
+    );
+  }
 }
 
 export default new TicketOrderRepository();

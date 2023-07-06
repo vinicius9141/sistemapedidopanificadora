@@ -1,6 +1,6 @@
 <template>
   <section
-    class="bg-[rgba(255,255,255,0.4)] w-full h-[100%] absolute hidden justify-center items-center"
+    class="bg-[rgba(255,255,255,0.4)] w-full h-[100%] absolute hidden justify-center items-center z-10"
     ref="display"
   >
     <article class="bg-white w-3/6 h-32 p-2 relative">

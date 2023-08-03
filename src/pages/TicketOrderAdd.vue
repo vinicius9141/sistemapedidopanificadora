@@ -117,7 +117,6 @@ const id = ref<string>("");
 const btnValue = ref<string>("");
 const productsInptEl = ref<HTMLInputElement[]>();
 const json = ref(JSON);
-const Console = ref(console);
 
 const setProduct = (e: any) => {
   const value = e.element.value;
